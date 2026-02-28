@@ -1,0 +1,1747 @@
+/**
+ * ============================================
+ * Steven Van Overmeiren - Portfolio
+ * Main Stylesheet
+ * ============================================
+ *
+ * Table of Contents:
+ *   1. Reset & Base Styles
+ *   2. Design Tokens (CSS Custom Properties)
+ *   3. Typography
+ *   4. Keyframe Animations
+ *   5. Scroll Reveal Animations
+ *   6. Navbar & Navigation
+ *   7. Layout (Main, Container)
+ *   8. Hero Section
+ *   9. About Section
+ *  10. Buttons
+ *  11. Projects Grid (Card Listing)
+ *  12. Project Detail Pages
+ *  13. Image Carousel
+ *  14. Detail Sections & Highlight Cards
+ *  15. Sub-Project Cards
+ *  16. PDF Viewer Grid
+ *  17. Contact Section
+ *  18. Resume Section
+ *  19. Footer
+ *  20. Image Modal (Lightbox)
+ *  21. Responsive Breakpoints
+ */
+
+
+/* ----------------------------------------
+ * 1. RESET & BASE STYLES
+ * Universal box-sizing and margin/padding
+ * reset for consistent cross-browser layout.
+ * ---------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* ----------------------------------------
+ * 2. DESIGN TOKENS (CSS Custom Properties)
+ * Centralized color palette, shadows,
+ * border radii, transitions, and layout
+ * variables. ASU maroon & gold branding.
+ * ---------------------------------------- */
+:root {
+  /* Brand colors (ASU) */
+  --maroon: #8C1D40;
+  --maroon-dark: #6B1630;
+  --maroon-light: #b02a55;
+  --gold: #FFC627;
+  --gold-dark: #e6b223;
+
+  /* Neutrals */
+  --white: #ffffff;
+  --off-white: #fafafa;
+  --gray-50: #f7f8fa;
+  --gray-100: #f0f2f5;
+  --gray-200: #e4e7ec;
+  --gray-300: #d0d5dd;
+  --gray-400: #98a2b3;
+  --gray-500: #667085;
+  --gray-600: #475467;
+  --gray-700: #344054;
+  --gray-800: #1d2939;
+  --gray-900: #101828;
+
+  /* Elevation shadows */
+  --shadow-xs: 0 1px 2px rgba(16,24,40,0.05);
+  --shadow-sm: 0 1px 3px rgba(16,24,40,0.06), 0 1px 2px rgba(16,24,40,0.04);
+  --shadow-md: 0 4px 8px -2px rgba(16,24,40,0.06), 0 2px 4px -2px rgba(16,24,40,0.04);
+  --shadow-lg: 0 12px 16px -4px rgba(16,24,40,0.08), 0 4px 6px -2px rgba(16,24,40,0.03);
+  --shadow-xl: 0 20px 24px -4px rgba(16,24,40,0.08), 0 8px 8px -4px rgba(16,24,40,0.03);
+  --shadow-2xl: 0 24px 48px -12px rgba(16,24,40,0.15);
+
+  /* Border radii */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  /* Transitions */
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: 0.15s ease;
+  --transition-spring: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-smooth: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Layout */
+  --max-width: 1200px;
+  --nav-height: 64px;
+}
+
+
+/* ----------------------------------------
+ * 3. TYPOGRAPHY & BASE ELEMENTS
+ * Font stack, smooth scrolling, default
+ * styles for links and headings.
+ * ---------------------------------------- */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: var(--gray-700);
+  background: var(--gray-50);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--maroon);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+a:hover {
+  color: var(--maroon-dark);
+}
+
+h1, h2, h3, h4 {
+  color: var(--gray-900);
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+
+/* ----------------------------------------
+ * 4. KEYFRAME ANIMATIONS
+ * Reusable animations for fade-in, slide-up,
+ * floating decorative elements, gradient
+ * shifting, and pulsing effects.
+ * ---------------------------------------- */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+
+/* ----------------------------------------
+ * 5. SCROLL REVEAL ANIMATIONS
+ * Applied via JavaScript IntersectionObserver.
+ * - .reveal: single element fade-in
+ * - .reveal-stagger: children animate
+ *   sequentially with staggered delays
+ * ---------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger children: each child fades in with increasing delay */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-stagger.visible > *:nth-child(1) { transition-delay: 0s; }
+.reveal-stagger.visible > *:nth-child(2) { transition-delay: 0.08s; }
+.reveal-stagger.visible > *:nth-child(3) { transition-delay: 0.16s; }
+.reveal-stagger.visible > *:nth-child(4) { transition-delay: 0.24s; }
+.reveal-stagger.visible > *:nth-child(5) { transition-delay: 0.32s; }
+.reveal-stagger.visible > *:nth-child(6) { transition-delay: 0.4s; }
+.reveal-stagger.visible > *:nth-child(7) { transition-delay: 0.48s; }
+.reveal-stagger.visible > *:nth-child(8) { transition-delay: 0.56s; }
+.reveal-stagger.visible > *:nth-child(9) { transition-delay: 0.64s; }
+.reveal-stagger.visible > *:nth-child(10) { transition-delay: 0.72s; }
+
+.reveal-stagger.visible > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* ----------------------------------------
+ * 6. NAVBAR & NAVIGATION
+ * Fixed glassmorphism navbar with maroon
+ * background, brand name, dropdown menu
+ * for projects, and mobile hamburger toggle.
+ * ---------------------------------------- */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--nav-height);
+  background: rgba(140, 29, 64, 0.95);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  z-index: 1000;
+  transition: all 0.4s ease;
+}
+
+/* Enhanced shadow on scroll (toggled via JS) */
+.navbar.scrolled {
+  background: rgba(140, 29, 64, 0.98);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 8px 24px rgba(140, 29, 64, 0.15);
+}
+
+/* Brand name and subtitle */
+.nav-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.nav-brand a {
+  color: var(--white);
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+  transition: all var(--transition);
+}
+
+.nav-brand a:hover { color: var(--gold); }
+
+.nav-brand .nav-subtitle {
+  color: rgba(255,198,39,0.9);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* Nav links row */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.1rem;
+}
+
+.nav-links a {
+  color: rgba(255,255,255,0.8);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition);
+  position: relative;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--white);
+  background: rgba(255,255,255,0.12);
+}
+
+/* Gold underline indicator on active link */
+.nav-links a.active::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 2px;
+  background: var(--gold);
+  border-radius: 1px;
+}
+
+/* Hamburger toggle (hidden on desktop) */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  position: relative;
+  width: 36px;
+  height: 36px;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--white);
+  position: absolute;
+  left: 8px;
+  transition: all var(--transition);
+  border-radius: 2px;
+}
+
+.nav-toggle span:nth-child(1) { top: 10px; }
+.nav-toggle span:nth-child(2) { top: 17px; }
+.nav-toggle span:nth-child(3) { top: 24px; }
+
+/* Animated X when menu is open */
+.nav-toggle.active span:nth-child(1) { top: 17px; transform: rotate(45deg); }
+.nav-toggle.active span:nth-child(2) { opacity: 0; }
+.nav-toggle.active span:nth-child(3) { top: 17px; transform: rotate(-45deg); }
+
+/* Projects dropdown menu */
+.nav-dropdown { position: relative; }
+
+.nav-dropdown .dropdown-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-6px);
+  background: var(--white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-2xl);
+  min-width: 280px;
+  padding: 0.4rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid var(--gray-100);
+}
+
+/* Decorative arrow on dropdown */
+.nav-dropdown .dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 12px;
+  height: 12px;
+  background: var(--white);
+  border-top: 1px solid var(--gray-100);
+  border-left: 1px solid var(--gray-100);
+}
+
+.nav-dropdown:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 0.5rem 0.85rem;
+  color: var(--gray-600);
+  font-size: 0.82rem;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+  font-weight: 500;
+  background: none;
+}
+
+.dropdown-menu a:hover {
+  background: var(--gray-50);
+  color: var(--maroon);
+  padding-left: 1.1rem;
+}
+
+
+/* ----------------------------------------
+ * 7. LAYOUT (Main Content & Container)
+ * Flex layout pushes footer to bottom.
+ * Container centers content with max-width.
+ * ---------------------------------------- */
+main {
+  flex: 1;
+  margin-top: var(--nav-height);
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+
+/* ----------------------------------------
+ * 8. HERO SECTION (Home Page)
+ * Two-column grid with text/buttons on the
+ * left and profile image on the right.
+ * Includes animated gradient orb decorations.
+ * ---------------------------------------- */
+.hero {
+  padding: 6rem 0 5rem;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--white) 0%, var(--gray-50) 100%);
+}
+
+/* Decorative floating gradient orbs */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  right: -150px;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(140,29,64,0.06) 0%, transparent 65%);
+  animation: float 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -200px;
+  left: -100px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255,198,39,0.06) 0%, transparent 65%);
+  animation: float 10s ease-in-out infinite reverse;
+  pointer-events: none;
+}
+
+/* Two-column grid: text (wider) | image */
+.hero-content {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 5rem;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* Hero text styles */
+.hero-text h1 {
+  font-size: 3.2rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  margin-bottom: 0.75rem;
+  line-height: 1.05;
+  color: var(--gray-900);
+}
+
+/* Animated gradient text effect for name */
+.hero-text h1 .gradient-text {
+  background: linear-gradient(135deg, var(--maroon) 0%, var(--maroon-light) 50%, var(--gold-dark) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 4s ease infinite;
+}
+
+.hero-text .university {
+  font-size: 0.95rem;
+  color: var(--gray-500);
+  font-weight: 500;
+  margin-bottom: 0.35rem;
+}
+
+.hero-text .degree {
+  display: inline-block;
+  font-size: 0.78rem;
+  color: var(--maroon);
+  font-weight: 700;
+  margin-bottom: 1.75rem;
+  padding: 0.3rem 0.9rem;
+  background: rgba(140,29,64,0.06);
+  border-radius: 50px;
+  letter-spacing: 0.02em;
+}
+
+.hero-text .summary {
+  font-size: 1rem;
+  color: var(--gray-600);
+  line-height: 1.75;
+  margin-bottom: 2rem;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.75rem;
+}
+
+.hero-socials {
+  display: flex;
+  gap: 0.6rem;
+}
+
+/* Profile image */
+.hero-image {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.hero-image img {
+  width: 340px;
+  height: 440px;
+  object-fit: cover;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-image:hover img {
+  transform: scale(1.02);
+}
+
+
+/* ----------------------------------------
+ * 9. ABOUT SECTION
+ * Centered card with gradient accent line
+ * on top, used on the home page.
+ * ---------------------------------------- */
+.about-section {
+  padding: 5rem 0;
+  position: relative;
+  background: linear-gradient(180deg, var(--gray-50) 0%, var(--gray-100) 50%, var(--gray-50) 100%);
+}
+
+/* Top accent line */
+.about-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--maroon), var(--gold));
+  border-radius: 2px;
+}
+
+.about-card {
+  max-width: 780px;
+  margin: 0 auto;
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  padding: 3rem 3.5rem;
+  position: relative;
+  border: 1px solid var(--gray-200);
+  box-shadow: var(--shadow-md);
+}
+
+/* Gradient bar at top of card */
+.about-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 2.5rem;
+  right: 2.5rem;
+  height: 3px;
+  background: linear-gradient(90deg, var(--maroon), var(--gold));
+  border-radius: 0 0 4px 4px;
+}
+
+.about-card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.25rem;
+  color: var(--gray-900);
+}
+
+.about-card h2 span {
+  color: var(--maroon);
+}
+
+.about-card p {
+  font-size: 0.95rem;
+  color: var(--gray-600);
+  line-height: 1.85;
+  margin-bottom: 1.1rem;
+}
+
+.about-card p:last-child { margin-bottom: 0; }
+
+
+/* ----------------------------------------
+ * 10. BUTTONS
+ * Reusable button styles with primary,
+ * outline, small, and icon-only variants.
+ * All buttons use pill-shaped border-radius.
+ * ---------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.5rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition);
+  border: 2px solid transparent;
+  text-decoration: none;
+  position: relative;
+  letter-spacing: 0.01em;
+}
+
+.btn-primary {
+  background: var(--maroon);
+  color: var(--white);
+  border-color: var(--maroon);
+}
+
+.btn-primary:hover {
+  background: var(--maroon-dark);
+  border-color: var(--maroon-dark);
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(140,29,64,0.3);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--maroon);
+  border-color: var(--gray-300);
+}
+
+.btn-outline:hover {
+  background: var(--maroon);
+  color: var(--white);
+  border-color: var(--maroon);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(140,29,64,0.3);
+}
+
+.btn-sm {
+  padding: 0.45rem 1.1rem;
+  font-size: 0.78rem;
+}
+
+/* Circular icon button (social links) */
+.btn-icon {
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  color: var(--gray-500);
+  box-shadow: var(--shadow-xs);
+  transition: all var(--transition-spring);
+}
+
+.btn-icon:hover {
+  border-color: var(--maroon);
+  color: var(--maroon);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-icon svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+
+/* ----------------------------------------
+ * 11. PROJECTS GRID (Card Listing)
+ * Responsive card grid on the main
+ * projects page. Each card has an image,
+ * title, description, skill tags, and link.
+ * ---------------------------------------- */
+
+/* Page header (used on projects, contact, resume) */
+.page-header {
+  text-align: center;
+  padding: 4rem 0 3rem;
+}
+
+.page-header h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.03em;
+}
+
+.page-header p {
+  font-size: 1rem;
+  color: var(--gray-500);
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Card grid layout */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.25rem;
+  padding-bottom: 5rem;
+}
+
+/* Background wrapper for projects page */
+.projects-page-bg {
+  background: linear-gradient(180deg, var(--white) 0%, var(--gray-50) 8%, var(--gray-50) 92%, var(--gray-100) 100%);
+  position: relative;
+}
+
+/* Individual project card */
+.project-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--gray-200);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: var(--shadow-sm);
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-xl);
+  border-color: rgba(140,29,64,0.2);
+}
+
+.project-card-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card:hover .project-card-image {
+  transform: scale(1.03);
+}
+
+.project-card-body {
+  padding: 1.25rem 1.5rem 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background: var(--white);
+}
+
+.project-card-body h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+  color: var(--gray-900);
+}
+
+.project-card-body p {
+  font-size: 0.85rem;
+  color: var(--gray-500);
+  line-height: 1.55;
+  margin-bottom: 0.9rem;
+  flex: 1;
+}
+
+/* Skill tags on project cards */
+.project-card-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-bottom: 1rem;
+}
+
+.skill-tag {
+  padding: 0.2rem 0.6rem;
+  background: rgba(140,29,64,0.06);
+  color: var(--maroon);
+  border-radius: 50px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  transition: all var(--transition-fast);
+  border: 1px solid rgba(140,29,64,0.08);
+}
+
+.skill-tag:hover {
+  background: rgba(140,29,64,0.12);
+  border-color: rgba(140,29,64,0.15);
+}
+
+/* "View Project" link with animated arrow */
+.project-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: var(--maroon);
+  transition: all var(--transition);
+}
+
+.project-card:hover .project-card-link { gap: 0.6rem; }
+
+.project-card-link svg {
+  width: 14px;
+  height: 14px;
+  transition: transform var(--transition);
+}
+
+.project-card:hover .project-card-link svg {
+  transform: translateX(3px);
+}
+
+
+/* ----------------------------------------
+ * 12. PROJECT DETAIL PAGES
+ * Layout for individual project pages
+ * including back link, title with accent
+ * bar, and subtitle.
+ * ---------------------------------------- */
+.project-detail {
+  padding: 3rem 0 5rem;
+  background: linear-gradient(180deg, var(--white) 0%, var(--gray-50) 15%, var(--gray-50) 100%);
+  min-height: 80vh;
+  position: relative;
+}
+
+.project-detail .container {
+  max-width: 1000px;
+}
+
+/* Back to Projects pill link */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--gray-400);
+  margin-bottom: 2rem;
+  transition: all var(--transition);
+  padding: 0.35rem 0.85rem;
+  border-radius: 50px;
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+}
+
+.back-link:hover {
+  color: var(--maroon);
+  background: rgba(140,29,64,0.04);
+  border-color: rgba(140,29,64,0.15);
+  gap: 0.55rem;
+}
+
+.back-link svg {
+  width: 14px;
+  height: 14px;
+}
+
+.project-detail h1 {
+  font-size: 2.25rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.03em;
+}
+
+/* Maroon-to-gold gradient accent bar under title */
+.project-detail h1::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--maroon), var(--gold));
+  border-radius: 2px;
+  margin-top: 0.65rem;
+}
+
+.project-detail .subtitle,
+.project-detail .project-subtitle {
+  font-size: 1rem;
+  color: var(--gray-500);
+  margin-bottom: 2.5rem;
+  line-height: 1.5;
+}
+
+
+/* ----------------------------------------
+ * 13. IMAGE CAROUSEL
+ * Auto-built from .gallery elements with
+ * 2+ images. Includes navigation arrows,
+ * dot indicators, counter badge, and
+ * touch swipe support.
+ * ---------------------------------------- */
+
+/* Active carousel container */
+.gallery.carousel-active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  margin-bottom: 3rem;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  background: var(--white);
+  padding: 1.5rem;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--gray-200);
+  box-shadow: var(--shadow-sm);
+}
+
+.gallery.carousel-active .carousel-track {
+  position: relative;
+  width: 100%;
+}
+
+/* Hide all items except the active one */
+.gallery.carousel-active .gallery-item {
+  display: none;
+  position: relative;
+  border-radius: 0;
+  box-shadow: none;
+  animation: fadeIn 0.35s ease;
+}
+
+.gallery.carousel-active .gallery-item.active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gallery.carousel-active .gallery-item img {
+  width: auto;
+  max-width: 100%;
+  height: 500px;
+  object-fit: contain;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+}
+
+/* Disable hover transforms inside carousel */
+.gallery.carousel-active .gallery-item:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.gallery.carousel-active .gallery-item:hover img {
+  transform: none;
+}
+
+/* Caption below image in carousel mode */
+.gallery.carousel-active .gallery-caption {
+  position: relative;
+  bottom: auto;
+  left: auto;
+  right: auto;
+  background: none;
+  opacity: 1;
+  text-align: center;
+  padding: 0.75rem 1.5rem 0;
+  font-size: 0.88rem;
+  color: var(--gray-500);
+  font-weight: 500;
+}
+
+/* Navigation arrows */
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(calc(-50% - 20px));
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.5);
+  border: none;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition);
+  z-index: 10;
+  font-size: 1.1rem;
+}
+
+.carousel-arrow:hover {
+  background: rgba(0,0,0,0.7);
+  transform: translateY(calc(-50% - 20px)) scale(1.1);
+}
+
+.carousel-arrow.prev { left: 0.5rem; }
+.carousel-arrow.next { right: 0.5rem; }
+
+/* Dot indicators */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0 0.5rem;
+}
+
+.carousel-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--gray-300);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition);
+  padding: 0;
+}
+
+/* Active dot expands into a pill shape */
+.carousel-dot.active {
+  background: var(--maroon);
+  width: 22px;
+  border-radius: 4px;
+}
+
+/* Image counter badge (e.g. "1 / 7") */
+.carousel-counter {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  background: rgba(0,0,0,0.45);
+  color: var(--white);
+  padding: 0.2rem 0.55rem;
+  border-radius: 50px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  z-index: 10;
+}
+
+/* Fallback grid for galleries with a single image */
+.gallery:not(.carousel-active) {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 3rem;
+}
+
+.gallery:not(.carousel-active) .gallery-item {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gallery:not(.carousel-active) .gallery-item:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+.gallery:not(.carousel-active) .gallery-item img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.gallery:not(.carousel-active) .gallery-item:hover img {
+  transform: scale(1.04);
+}
+
+/* Hover-reveal caption overlay */
+.gallery:not(.carousel-active) .gallery-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2.5rem 0.75rem 0.6rem;
+  background: linear-gradient(transparent, rgba(0,0,0,0.7));
+  color: var(--white);
+  font-size: 0.75rem;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.gallery:not(.carousel-active) .gallery-item:hover .gallery-caption {
+  opacity: 1;
+}
+
+
+/* ----------------------------------------
+ * 14. DETAIL SECTIONS & HIGHLIGHT CARDS
+ * White card containers for project content
+ * (overview, process, tools, skills).
+ * Highlight cards used for outcomes and
+ * reflections with a maroon left border.
+ * ---------------------------------------- */
+
+/* Standard detail section card */
+.detail-section {
+  margin-bottom: 2.25rem;
+  background: var(--white);
+  padding: 1.75rem 2rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--gray-200);
+  box-shadow: var(--shadow-xs);
+  transition: box-shadow var(--transition);
+}
+
+.detail-section:hover {
+  box-shadow: var(--shadow-sm);
+}
+
+.detail-section h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.55rem;
+  color: var(--gray-900);
+  position: relative;
+  display: inline-block;
+  border-bottom: none;
+}
+
+/* Gradient accent line under section heading */
+.detail-section h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 32px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--maroon), var(--gold));
+  border-radius: 3px;
+}
+
+.detail-section p {
+  font-size: 0.95rem;
+  color: var(--gray-600);
+  line-height: 1.8;
+}
+
+.detail-section ul, .detail-section ol {
+  padding-left: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.detail-section li {
+  font-size: 0.9rem;
+  color: var(--gray-600);
+  line-height: 1.65;
+  margin-bottom: 0.35rem;
+}
+
+.detail-section li::marker {
+  color: var(--maroon);
+}
+
+/* Two-column layout for process + tools */
+.detail-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 2.25rem;
+}
+
+.detail-columns .detail-section {
+  margin-bottom: 0;
+}
+
+/* Skills list (flex wrap of skill tags) */
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.skills-list .skill-tag {
+  padding: 0.3rem 0.8rem;
+  font-size: 0.78rem;
+}
+
+/* Tools list (flex wrap of tool tags) */
+.tools-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.tool-tag {
+  padding: 0.3rem 0.8rem;
+  background: linear-gradient(135deg, var(--gray-50) 0%, var(--gray-100) 100%);
+  color: var(--gray-600);
+  border-radius: 50px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border: 1px solid var(--gray-200);
+  transition: all var(--transition-fast);
+}
+
+.tool-tag:hover {
+  background: linear-gradient(135deg, var(--gray-100) 0%, var(--gray-200) 100%);
+  border-color: var(--gray-300);
+  transform: translateY(-1px);
+}
+
+/* Highlight card (outcomes, reflections) */
+.highlight-card {
+  background: linear-gradient(135deg, rgba(140,29,64,0.04) 0%, rgba(255,198,39,0.04) 100%);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem 2rem;
+  border: 1px solid rgba(140,29,64,0.12);
+  border-left: 4px solid var(--maroon);
+  margin-bottom: 1.75rem;
+  position: relative;
+  box-shadow: var(--shadow-xs);
+}
+
+.highlight-card h2, .highlight-card h3 {
+  font-size: 1.15rem;
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0.6rem;
+  display: block;
+  color: var(--maroon);
+}
+
+/* Remove the accent line on highlight card headings */
+.highlight-card h2::after, .highlight-card h3::after {
+  display: none;
+}
+
+.highlight-card p {
+  font-size: 0.93rem;
+  color: var(--gray-600);
+  line-height: 1.75;
+}
+
+.highlight-card ul, .highlight-card ol {
+  padding-left: 1.25rem;
+  margin: 0.5rem 0;
+}
+
+.highlight-card li {
+  font-size: 0.9rem;
+  color: var(--gray-600);
+  line-height: 1.65;
+  margin-bottom: 0.25rem;
+}
+
+.highlight-card li::marker {
+  color: var(--maroon);
+}
+
+
+/* ----------------------------------------
+ * 15. SUB-PROJECT CARDS
+ * Two-column grid for sub-pages within a
+ * parent project (e.g. solar car subsystems).
+ * ---------------------------------------- */
+.sub-projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+.sub-project-card {
+  background: var(--white);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--gray-200);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: var(--shadow-sm);
+}
+
+.sub-project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(140,29,64,0.2);
+}
+
+.sub-project-card img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sub-project-card:hover img {
+  transform: scale(1.04);
+}
+
+.sub-project-card-body {
+  padding: 1.15rem;
+}
+
+.sub-project-card-body h3 {
+  font-size: 1rem;
+  margin-bottom: 0.35rem;
+}
+
+.sub-project-card-body p {
+  font-size: 0.82rem;
+  color: var(--gray-500);
+  margin-bottom: 0.65rem;
+  line-height: 1.5;
+}
+
+
+/* ----------------------------------------
+ * 16. PDF VIEWER GRID
+ * Side-by-side embedded PDF iframes with
+ * download buttons, used on project pages
+ * with multiple reports (e.g. finite element,
+ * wind energy).
+ * ---------------------------------------- */
+.pdf-viewer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+.pdf-viewer-card {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.pdf-viewer-card h3 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--gray-800);
+  margin: 0;
+}
+
+.pdf-embed {
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--gray-200);
+  background: var(--gray-100);
+}
+
+.pdf-embed iframe {
+  width: 100%;
+  height: 500px;
+  border: none;
+  display: block;
+}
+
+.pdf-viewer-card .btn {
+  align-self: flex-start;
+}
+
+.pdf-downloads {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 0.75rem;
+}
+
+
+/* ----------------------------------------
+ * 17. CONTACT SECTION
+ * Centered layout with contact link cards
+ * (email, LinkedIn, etc.) and a gradient
+ * accent line at the top.
+ * ---------------------------------------- */
+.contact-section {
+  padding: 5rem 0;
+  text-align: center;
+  background: linear-gradient(180deg, var(--white) 0%, var(--gray-50) 30%, var(--gray-50) 70%, var(--gray-100) 100%);
+  position: relative;
+}
+
+/* Top gradient accent line */
+.contact-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--maroon), var(--gold), var(--maroon));
+}
+
+.contact-section h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.03em;
+}
+
+.contact-section .intro {
+  font-size: 1rem;
+  color: var(--gray-500);
+  max-width: 480px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.65;
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  max-width: 400px;
+  margin: 0 auto 2.5rem;
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 1rem 1.25rem;
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  text-align: left;
+  box-shadow: var(--shadow-sm);
+}
+
+.contact-link:hover {
+  border-color: var(--maroon);
+  transform: translateX(6px);
+  box-shadow: -4px 4px 20px rgba(140,29,64,0.08);
+  color: var(--maroon);
+}
+
+.contact-link svg {
+  width: 20px;
+  height: 20px;
+  color: var(--maroon);
+  flex-shrink: 0;
+}
+
+.contact-link .contact-label {
+  font-size: 0.65rem;
+  color: var(--gray-400);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.contact-link .contact-value {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--gray-800);
+}
+
+.contact-footer {
+  font-size: 0.9rem;
+  color: var(--gray-400);
+  font-style: italic;
+}
+
+
+/* ----------------------------------------
+ * 18. RESUME SECTION
+ * Full-width embedded PDF viewer with
+ * download/view buttons above.
+ * ---------------------------------------- */
+.resume-section {
+  padding: 3rem 0 5rem;
+  text-align: center;
+  background: linear-gradient(180deg, var(--white) 0%, var(--gray-50) 20%, var(--gray-50) 100%);
+}
+
+.resume-section h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.03em;
+}
+
+.resume-actions {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.resume-embed {
+  width: 100%;
+  max-width: 850px;
+  margin: 0 auto;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--gray-200);
+}
+
+.resume-embed iframe {
+  width: 100%;
+  height: 1000px;
+  border: none;
+}
+
+
+/* ----------------------------------------
+ * 19. FOOTER
+ * Dark footer with gradient accent line
+ * at the top. Stays at bottom via flexbox.
+ * ---------------------------------------- */
+.footer {
+  background: var(--gray-900);
+  color: var(--gray-500);
+  padding: 2rem 0;
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 500;
+  margin-top: auto;
+  letter-spacing: 0.02em;
+  position: relative;
+}
+
+/* Top gradient accent line */
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--maroon), var(--gold), var(--maroon));
+}
+
+.footer a { color: var(--gold); }
+.footer a:hover { color: var(--gold-dark); }
+
+
+/* ----------------------------------------
+ * 20. IMAGE MODAL (Lightbox)
+ * Full-screen overlay for viewing gallery
+ * images at full size. Triggered by clicking
+ * a carousel image. Close via X, overlay
+ * click, or Escape key.
+ * ---------------------------------------- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.92);
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+}
+
+.modal-overlay.active {
+  display: flex;
+  animation: fadeIn 0.15s ease;
+}
+
+.modal-content {
+  max-width: 90vw;
+  max-height: 85vh;
+  position: relative;
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-content img {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.modal-caption {
+  text-align: center;
+  color: rgba(255,255,255,0.6);
+  margin-top: 0.75rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+
+.modal-close {
+  position: absolute;
+  top: -44px;
+  right: 0;
+  background: rgba(255,255,255,0.08);
+  border: none;
+  color: var(--white);
+  font-size: 1.4rem;
+  cursor: pointer;
+  line-height: 1;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+}
+
+.modal-close:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+
+/* ----------------------------------------
+ * 21. RESPONSIVE BREAKPOINTS
+ * Adapts layout for tablets (900px),
+ * mobile (768px), and small phones (480px).
+ * ---------------------------------------- */
+
+/* Tablet: stack hero to single column */
+@media (max-width: 900px) {
+  .hero-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 2.5rem;
+  }
+
+  .hero-text h1 { font-size: 2.5rem; }
+  .hero-text .degree { margin-left: auto; margin-right: auto; }
+  .hero-buttons { justify-content: center; }
+  .hero-socials { justify-content: center; }
+  .hero-image { order: -1; }
+  .hero-image img { width: 240px; height: 310px; }
+  .detail-columns { grid-template-columns: 1fr; }
+
+  .gallery.carousel-active .gallery-item img { height: 380px; }
+}
+
+/* Mobile: show hamburger menu, single-column grids */
+@media (max-width: 768px) {
+  :root { --nav-height: 56px; }
+
+  .navbar { padding: 0 1.25rem; }
+  .nav-brand a { font-size: 0.95rem; }
+  .nav-brand .nav-subtitle { font-size: 0.55rem; }
+
+  /* Full-width slide-down mobile menu */
+  .nav-links {
+    position: fixed;
+    top: var(--nav-height);
+    left: 0;
+    right: 0;
+    background: rgba(140, 29, 64, 0.98);
+    backdrop-filter: blur(24px);
+    flex-direction: column;
+    padding: 0.75rem;
+    gap: 0.15rem;
+    transform: translateY(-120%);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: var(--shadow-2xl);
+  }
+
+  .nav-links.open { transform: translateY(0); opacity: 1; }
+  .nav-links a { width: 100%; text-align: center; padding: 0.65rem 1rem; }
+  .nav-toggle { display: block; }
+
+  /* Flatten dropdown into mobile menu */
+  .nav-dropdown .dropdown-menu {
+    position: static;
+    transform: none;
+    box-shadow: none;
+    border: none;
+    background: rgba(255,255,255,0.05);
+    min-width: auto;
+    opacity: 1;
+    visibility: visible;
+    display: none;
+    margin-top: 0.15rem;
+  }
+
+  .nav-dropdown .dropdown-menu::before { display: none; }
+
+  .nav-dropdown:hover .dropdown-menu,
+  .nav-dropdown .dropdown-menu.open {
+    display: block;
+  }
+
+  .dropdown-menu a {
+    color: rgba(255,255,255,0.7);
+    text-align: center;
+  }
+
+  .dropdown-menu a:hover {
+    background: rgba(255,255,255,0.08);
+    color: var(--white);
+    padding-left: 0.85rem;
+  }
+
+  /* Stack grids to single column */
+  .projects-grid { grid-template-columns: 1fr; }
+  .sub-projects-grid { grid-template-columns: 1fr; }
+  .pdf-viewer-grid { grid-template-columns: 1fr; }
+  .pdf-embed iframe { height: 400px; }
+  .page-header h1 { font-size: 2rem; }
+  .project-detail h1 { font-size: 1.65rem; }
+  .container { padding: 0 1.25rem; }
+  .about-card { padding: 2rem 1.5rem; }
+  .detail-section { padding: 1.25rem 1.25rem; }
+  .gallery.carousel-active { padding: 1rem; }
+
+  .gallery:not(.carousel-active) { grid-template-columns: 1fr; }
+  .gallery:not(.carousel-active) .gallery-item img { height: 200px; }
+  .gallery.carousel-active .gallery-item img { height: 300px; }
+
+  .carousel-arrow { width: 38px; height: 38px; font-size: 0.95rem; }
+  .resume-embed iframe { height: 70vh; }
+  .contact-section h1 { font-size: 2rem; }
+
+  .hero { padding: 3.5rem 0 3rem; }
+}
+
+/* Small phones: further size reductions */
+@media (max-width: 480px) {
+  .hero-buttons { flex-direction: column; align-items: center; }
+  .hero-text h1 { font-size: 2rem; }
+  .gallery.carousel-active .gallery-item img { height: 240px; }
+  .carousel-arrow { width: 34px; height: 34px; }
+}

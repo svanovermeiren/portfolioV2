@@ -1,0 +1,16 @@
+# Backup folder
+backup-goodversion/
+
+# Windows reserved device name
+nul
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Node
+node_modules/

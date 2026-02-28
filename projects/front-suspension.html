@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Front Suspension | Steven Van Overmeiren</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-brand">
+      <a href="../index.html">Steven Van Overmeiren</a>
+      <span class="nav-subtitle">Mechanical Engineering Portfolio</span>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links">
+      <a href="../index.html">Home</a>
+      <div class="nav-dropdown">
+        <a href="../projects.html" class="active">Projects</a>
+        <div class="dropdown-menu">
+          <a href="solar-car-suspension.html">ASU Solar Car Rear Suspension</a>
+          <a href="solar-car-mechanical-systems.html">Solar Car Mechanical Systems</a>
+          <a href="hydroponic-system.html">Automated NFT Hydroponic System</a>
+          <a href="welding-table.html">Mach One Solutions Welding Table</a>
+          <a href="finite-element.html">Finite Element Code Projects</a>
+          <a href="arc-reactor.html">3D Printed Arc Reactor</a>
+          <a href="bolt-drilling-fixture.html">Safety Wire Bolt Drilling Fixture</a>
+          <a href="aeration-project.html">AZGFD Aeration Project</a>
+          <a href="wind-energy.html">Wind Energy Research</a>
+          <a href="gpu-bracket.html">Custom GPU Support Bracket</a>
+        </div>
+      </div>
+      <a href="../resume.html">Resume</a>
+      <a href="../contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="project-detail">
+      <div class="container">
+        <a href="solar-car-mechanical-systems.html" class="back-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Back to Mechanical Systems
+        </a>
+
+        <h1>Front Suspension</h1>
+        <p class="subtitle">Custom double wishbone suspension system emphasizing a small form factor</p>
+
+        <div class="gallery">
+          <div class="gallery-item">
+            <img src="../assets/images/Front Suspension Real.jpeg" alt="The double wishbone suspension in all of its glory" loading="lazy">
+            <p class="gallery-caption">The double wishbone suspension in all of its glory</p>
+          </div>
+          <div class="gallery-item">
+            <img src="../assets/images/Front Suspension CAD.png" alt="SolidWorks assembly CAD model I created of the front suspension" loading="lazy">
+            <p class="gallery-caption">SolidWorks assembly CAD model I created of the front suspension</p>
+          </div>
+          <div class="gallery-item">
+            <img src="../assets/images/4 Control Arms.jpeg" alt="Simple welded chromoly steel control arms assembled with hardware" loading="lazy">
+            <p class="gallery-caption">Simple welded chromoly steel control arms assembled with hardware</p>
+          </div>
+          <div class="gallery-item">
+            <img src="../assets/images/Control Arm Stress.PNG" alt="Ansys Structural simulation of the maximum stress the control arm will experience" loading="lazy">
+            <p class="gallery-caption">Ansys Structural simulation of the maximum stress the control arm will experience</p>
+          </div>
+          <div class="gallery-item">
+            <img src="../assets/images/Control Arms.jpg" alt="Control arm in the fixture plate designed to locate important mounting holes" loading="lazy">
+            <p class="gallery-caption">Control arm in the fixture plate designed to locate important mounting holes</p>
+          </div>
+          <div class="gallery-item">
+            <img src="../assets/images/Welding the Control Arms.jpeg" alt="TIG welding the control arms" loading="lazy">
+            <p class="gallery-caption">TIG welding the control arms</p>
+          </div>
+          <div class="gallery-item">
+            <img src="../assets/images/Hub and Spindles and Upright.jpeg" alt="Freshly machined upright, spindle, and wheel hub, interfacing as intended" loading="lazy">
+            <p class="gallery-caption">Freshly machined upright, spindle, and wheel hub, interfacing as intended</p>
+          </div>
+          <div class="gallery-item">
+            <img src="../assets/images/CNC Milling.jpeg" alt="Upright in the CNC mill fixture, mid-operation" loading="lazy">
+            <p class="gallery-caption">Upright in the CNC mill fixture, mid-operation</p>
+          </div>
+          <div class="gallery-item">
+            <img src="../assets/images/Press Fitting the Bearings.jpeg" alt="Using an arbor press to press-fit bearings into the uprights" loading="lazy">
+            <p class="gallery-caption">Using an arbor press to press-fit bearings into the uprights</p>
+          </div>
+        </div>
+
+        <div class="detail-section">
+          <h2>Overview</h2>
+          <p>While chassis fabrication was happening, I designed our front suspension simultaneously to ensure compatibility. One of the bigger goals with this car was to maintain a thin profile, and keep our track width low - while still being mindful of the possibility of stability loss. A double wishbone configuration was chosen for its overall mechanical simplicity and ease of manufacturing, while still acheiving the objective. It is comprised of an array of major components:</p>
+          <ul>
+            <li>Uprights</li>
+            <li>Wheel Hubs</li>
+            <li>Spindles</li>
+            <li>Control Arms</li>
+            <li>Coil Over Shocks</li>
+          </ul>
+          <p>The uprights were machined out of 6061-T6 aluminum, serving as the component where the spindle, control arms, brake caliper, and steering linkage all interface. Similarly, the wheel hubs and spindles machined and turned respectively out 6061. These components directly mate with each other with bolts and weld reinforcement. The control arms were assembled out of mixture of welded 4130 chromoly steel tubing, weldable rod ends, and speherical bearings. This gave the control arms full adjustability, sufficient travel, and strength for the application. Lastly, the coil over shocks were purchased off the shelf as a full assembly with a spring stiffness and size that fit our need. This system gave me the opportunity to exercise my DFM skills, requiring extensive communication with the ASU machinists to make sure the design components were feasibly and optimally manufacturable.</p>
+        </div>
+
+        <div class="detail-columns">
+          <div class="detail-section">
+            <h2>Process</h2>
+            <ol>
+              <li>Iterated in SolidWorks with a 3D sketch modeling the dynamic travel of the shock and linkage</li>
+              <li>Modeled uprights and control arm assemblies, considering COTS hardware that each part needed to interface with</li>
+              <li>Validated individual part response to shock loads in Ansys</li>
+              <li>Communicated DFM strategy with ASU machine shop to machine/turn uprights, wheel hubs, and spindles</li>
+              <li>Designed weld fixtures for control arms to locate rod ends and spherical bearings at true position during welding</li>
+              <li>Assembled system with proper hardware</li>
+            </ol>
+          </div>
+          <div class="detail-section">
+            <h2>Tools</h2>
+            <div class="tools-list">
+              <span class="tool-tag">SolidWorks</span>
+              <span class="tool-tag">CNC Mill</span>
+              <span class="tool-tag">CNC Lathe</span>
+              <span class="tool-tag">Laser Cutting</span>
+              <span class="tool-tag">Tap Drill</span>
+              <span class="tool-tag">Tube Notching</span>
+              <span class="tool-tag">TIG Welding</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="detail-section">
+          <h2>Skills</h2>
+          <div class="skills-list">
+            <span class="skill-tag">Team Leadership</span>
+            <span class="skill-tag">Vehicle Dynamics</span>
+            <span class="skill-tag">CAD/CAM</span>
+            <span class="skill-tag">Finite Element Analysis</span>
+            <span class="skill-tag">Design for Manufacturing</span>
+            <span class="skill-tag">Fixturing</span>
+            <span class="skill-tag">Metal Fabrication</span>
+            <span class="skill-tag">Hardware Assembly</span>
+          </div>
+        </div>
+
+        <div class="highlight-card">
+          <h3>Outcomes and Results</h3>
+          <p>The final assembly of the front suspension double wishbone went surprisingly well. The inclusion of adjustable threaded rod ends made for a very easy assembly process. When everything was attached there was no sign of interference during turning, speed bumps, and other dynamic tests. Additionally, there was no signs of plastic deformation or yielding in any part, which reinforced the Ansys results. Having had much experience with steel and welding it after the chassis the mechanical team made a much cleaner result for the control arms, which I would say are some of the most aethestically pleasing components on the solar car. One part of the assembly process that remains challenging however, is placing the shocks inside their mounting points. I plan to design a custom shock compressor - catered to our spring size, to hopefully make that process go more smoothly. Overall, the team and I look to continue testing the front suspension under full car weight later in the 2025 school year.</p>
+        </div>
+
+        <div class="highlight-card">
+          <h3>Reflection</h3>
+          <p><em>This system really strengthened my understanding of the importance of designing parts that are possible to make with machines that are widely available in engineering. Communicating with machinists has taught me tons about the easiest and most cost effective to acheive certain features in machined parts. Considering how valuable doing this is in industry, I consider this experience invaluable. Some decisions in the suspension design process were made without the input of a machinist, and definitely made some aspects of the system more difficult to make. Given the opportunity to do it again, I would have made the hub and spindle in one machined part vs two, as the cost difference does not end up being worth the added machining time. Additionally, I was made aware of the importance of knowing the standard hardware on the shelf and making sure custom designed parts interface with what is accessible off the shelf. It would be undesirable to design a part that uses a very niche bolt or bearing size when it could be avoided, and then have to pay a premium for a rarer COTS part. In contrast to the chassis, I had full design ownership of the hardware in this system and it was a real treat to see my work come to life.</em></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal-overlay" id="imageModal">
+    <div class="modal-content">
+      <button class="modal-close">&times;</button>
+      <img src="" alt="">
+      <p class="modal-caption"></p>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Steven Van Overmeiren. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

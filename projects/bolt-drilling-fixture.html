@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Safety Wire Bolt Drilling Fixture | Steven Van Overmeiren</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-brand">
+      <a href="../index.html">Steven Van Overmeiren</a>
+      <span class="nav-subtitle">Mechanical Engineering Portfolio</span>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links">
+      <a href="../index.html">Home</a>
+      <div class="nav-dropdown">
+        <a href="../projects.html" class="active">Projects</a>
+        <div class="dropdown-menu">
+          <a href="solar-car-suspension.html">ASU Solar Car Rear Suspension</a>
+          <a href="solar-car-mechanical-systems.html">Solar Car Mechanical Systems</a>
+          <a href="hydroponic-system.html">Automated NFT Hydroponic System</a>
+          <a href="welding-table.html">Mach One Solutions Welding Table</a>
+          <a href="finite-element.html">Finite Element Code Projects</a>
+          <a href="arc-reactor.html">3D Printed Arc Reactor</a>
+          <a href="bolt-drilling-fixture.html">Safety Wire Bolt Drilling Fixture</a>
+          <a href="aeration-project.html">AZGFD Aeration Project</a>
+          <a href="wind-energy.html">Wind Energy Research</a>
+          <a href="gpu-bracket.html">Custom GPU Support Bracket</a>
+        </div>
+      </div>
+      <a href="../resume.html">Resume</a>
+      <a href="../contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <main class="project-detail">
+    <div class="container">
+      <a href="../projects.html" class="back-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to Projects
+      </a>
+
+      <h1>Safety Wire Bolt Drilling Fixture</h1>
+      <p class="subtitle">A fixture used to drill safety wire holes in bolts missing the hole</p>
+
+      <div class="gallery">
+        <div class="gallery-item">
+          <img src="../assets/images/Safety Wire Bolt Drilling Fixture CAD With Bolts Wide.png" alt="SolidWorks assembly CAD model I created of the fixture" loading="lazy">
+          <p class="gallery-caption">SolidWorks assembly CAD model I created of the fixture</p>
+        </div>
+        <div class="gallery-item">
+          <img src="../assets/images/Safety Wire Bolt Drilling Fixture Hole Starter CAD.png" alt="SolidWorks CAD model of drill guide I created" loading="lazy">
+          <p class="gallery-caption">SolidWorks CAD model of drill guide I created</p>
+        </div>
+        <div class="gallery-item">
+          <img src="../assets/images/Safety Wire Bolt Drilling Fixture DXF.png" alt="One DXF generated to laser-cut the fixture" loading="lazy">
+          <p class="gallery-caption">One DXF generated to laser-cut the fixture</p>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <h2>Overview</h2>
+        <p>The American Solar Challenge regulations state that all critical fasteners must be augmented in a fashion that they are impossible to loosen unintentionally. For the ASU Solar Car, one of the easiest ways to ensure this is to use bolts that have holes in the head for the critical fasteners, so that safety wire can be routed through. The problem with that was, we already have tons of existing bolts that would work on the car at various locations but they are missing the safety wire bolt hole. To salvage the use of these bolts, I whipped up a design for a jig that could be used to drill these bolt holes in existing bolt heads. It's assembled and welded out of several laser-cut mild steel components and is compatible with a few common bolt sizes and types used on the solar car.</p>
+      </div>
+
+      <div class="detail-columns">
+        <div class="detail-section">
+          <h2>Process</h2>
+          <ol>
+            <li>Considered existing bolts on the car that required modification</li>
+            <li>Established a manufacturing process for making the fixture</li>
+            <li>Created a CAD assembly model in SolidWorks</li>
+            <li>Generated DXFs of parts to send off for laser-cutting</li>
+            <li>TIG welded laser-cut parts together</li>
+            <li>Drilled holes for drill bit to pass through</li>
+          </ol>
+        </div>
+        <div class="detail-section">
+          <h2>Tools</h2>
+          <div class="tools-list">
+            <span class="tool-tag">SolidWorks</span>
+            <span class="tool-tag">Weld Fixtures</span>
+            <span class="tool-tag">Laser Cutting</span>
+            <span class="tool-tag">TIG Welding</span>
+            <span class="tool-tag">Drill Press</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <h2>Skills</h2>
+        <div class="skills-list">
+          <span class="skill-tag">3D Modeling</span>
+          <span class="skill-tag">Design for Manufacturing</span>
+          <span class="skill-tag">Design for Assembly</span>
+          <span class="skill-tag">Prototyping</span>
+        </div>
+      </div>
+
+      <div class="highlight-card">
+        <h3>Outcomes and Results</h3>
+        <p>After successfully drilling a hole through a bolt head using the fixture, I knew the design was a success. There was some difficulty drilling at the true position of where the holes were intended to go, so I designed a 3D printed spacing jig so that the drill press was guided into the correct position each time. When this was made, it became much easier to make the holes of interest. This project was particularly satisfying because it only required 1 interation to prove the concept, which was a nice change of pace.</p>
+      </div>
+
+      <div class="highlight-card">
+        <h3>Reflection</h3>
+        <p><em>Reflecting on this project, I thought it was a great exercise of designing for manufacturing. There was many manufacturing paths that could've been taken when designing this fixture, but deciding on one and then design in CAD specfically for that use case was satisfying. Because of burrs that are left behind when laser cutting (especially at sharp corners), I added circular cutouts at some vertices to circumvent that issue. If those vertices were left in there, it's very possible we would have had to spent hours filing and deburring each corner. It's little things like that that are important when designing for manufacturing, that some people may not be thinking about.</em></p>
+      </div>
+    </div>
+  </main>
+
+  <div class="modal-overlay" id="imageModal">
+    <div class="modal-content">
+      <button class="modal-close">&times;</button>
+      <img src="" alt="">
+      <p class="modal-caption"></p>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Steven Van Overmeiren. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

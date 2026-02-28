@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom GPU Support Bracket | Steven Van Overmeiren</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-brand">
+      <a href="../index.html">Steven Van Overmeiren</a>
+      <span class="nav-subtitle">Mechanical Engineering Portfolio</span>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links">
+      <a href="../index.html">Home</a>
+      <div class="nav-dropdown">
+        <a href="../projects.html" class="active">Projects</a>
+        <div class="dropdown-menu">
+          <a href="solar-car-suspension.html">ASU Solar Car Rear Suspension</a>
+          <a href="solar-car-mechanical-systems.html">Solar Car Mechanical Systems</a>
+          <a href="hydroponic-system.html">Automated NFT Hydroponic System</a>
+          <a href="welding-table.html">Mach One Solutions Welding Table</a>
+          <a href="finite-element.html">Finite Element Code Projects</a>
+          <a href="arc-reactor.html">3D Printed Arc Reactor</a>
+          <a href="bolt-drilling-fixture.html">Safety Wire Bolt Drilling Fixture</a>
+          <a href="aeration-project.html">AZGFD Aeration Project</a>
+          <a href="wind-energy.html">Wind Energy Research</a>
+          <a href="gpu-bracket.html">Custom GPU Support Bracket</a>
+        </div>
+      </div>
+      <a href="../resume.html">Resume</a>
+      <a href="../contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <main class="project-detail">
+    <div class="container">
+      <a href="../projects.html" class="back-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to Projects
+      </a>
+
+      <h1>Custom GPU Support Bracket</h1>
+      <p class="subtitle">A custom-designed and fabricated support bracket to prevent GPU sag</p>
+
+      <div class="gallery">
+        <div class="gallery-item">
+          <img src="../assets/images/GPU Getting Support.jpeg" alt="Finished GPU support bracket installed in PC case and supporting the GPU" loading="lazy">
+          <p class="gallery-caption">Finished GPU support bracket installed in PC case and supporting the GPU</p>
+        </div>
+        <div class="gallery-item">
+          <img src="../assets/images/GPU Support Bracket CAD.png" alt="SolidWorks CAD assembly model of the GPU support bracket design" loading="lazy">
+          <p class="gallery-caption">SolidWorks CAD assembly model of the GPU support bracket design</p>
+        </div>
+        <div class="gallery-item">
+          <img src="../assets/images/GPU Support Bracket Real.jpeg" alt="GPU support bracket outside of the PC case" loading="lazy">
+          <p class="gallery-caption">GPU support bracket outside of the PC case</p>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <h2>Overview</h2>
+        <p>I built a new PC recently with one of the new air-cooled RTX NVIDIA cards from MSI. These cards are known for their large size, as the GPU comes with a GPU support bracket that is supposed to help prevent the GPU from sagging/deflecting excessively when installed. However, there was a fatal design problem with the included support bracket, as it was not able to fit in the lower PCIe slots. Because I wanted to use these lower slots, I decided to make my own. My improved design retains the magnetic bottom of the original, but instead opts for a screw-in support vs. one that is clipped. This allows for more refined and easier adjustment on the fly. I iterated on the fitment of this design quickly using 3D printing to ensure the threads interfaced properly. I glued foam to the support top to help soften the support surface and minimize scratching.</p>
+      </div>
+
+      <div class="detail-columns">
+        <div class="detail-section">
+          <h2>Process</h2>
+          <ol>
+            <li>Measured GPU dimensions, case clearance, and required distance to bridge</li>
+            <li>Created support bracket assembly in SolidWorks</li>
+            <li>Prototyped and iterated on design using 3D printing to check fitment</li>
+            <li>Glued magnet and foam features to optimize installation</li>
+            <li>Installed support bracket in PC case</li>
+          </ol>
+        </div>
+        <div class="detail-section">
+          <h2>Tools</h2>
+          <div class="tools-list">
+            <span class="tool-tag">SolidWorks</span>
+            <span class="tool-tag">3D Printing</span>
+            <span class="tool-tag">Adhesives</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <h2>Skills</h2>
+        <div class="skills-list">
+          <span class="skill-tag">Design for Manufacturing</span>
+          <span class="skill-tag">Rapid Prototyping</span>
+        </div>
+      </div>
+
+      <div class="highlight-card">
+        <h3>Outcome and Results</h3>
+        <p>The custom GPU support bracket was able to successfully eliminate GPU sag, removing excess stress on the PCIe slot. The 3D printed assembly was more than enough to support the GPU and keeping it perpendicular to the motherboard. It's threaded design is an improvement over the old one, as it allows for the active adjustment of the support height without having to remove it from the case. The magnet on the bottom ensures that if the case is moved or bumped that it won't displace the support.</p>
+      </div>
+
+      <div class="highlight-card">
+        <h3>Reflection</h3>
+        <p><em>It's little projects like these that I love to seek out because it allows me to exercise my desire to continually improve existing designs. I'm always looking for ways to apply my engineering skills to make life a little bit easier, and this project was a great example of that. I recognized a product that I used that needed to be improved, and I was able to modify the design to meet my needs. Additionally, this project continues to increase my fascination with the power of 3D printing. Without thi technology, the speed in which I made this part just would not have been possible. 3D printing to me is the clear future of engineering and manufacturing at a rapid pace. I am looking forward to the next time I am able to exercise these skills in my every day life.</em></p>
+      </div>
+    </div>
+  </main>
+
+  <div class="modal-overlay" id="imageModal">
+    <div class="modal-content">
+      <button class="modal-close">&times;</button>
+      <img src="" alt="">
+      <p class="modal-caption"></p>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Steven Van Overmeiren. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

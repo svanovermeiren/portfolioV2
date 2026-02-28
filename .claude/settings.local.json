@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:svanover.xyz)",
+      "WebFetch(domain:www.svanover.xyz)",
+      "WebSearch",
+      "WebFetch(domain:web.archive.org)",
+      "Bash(curl:*)",
+      "Bash(dir:*)",
+      "Bash(python3:*)",
+      "Bash(head:*)",
+      "Bash(grep:*)",
+      "Bash(ls -la \"C:\\\\VSCODE\\\\SteveCopy\\\\assets\\\\images\"\" 2>&1 | head -20 && echo \"---\" && ls \"C:VSCODESteveCopyassetsimages\"\")",
+      "Bash(start \"\" \"C:\\\\VSCODE\\\\SteveCopy\\\\index.html\")",
+      "Bash(start \"\" \"C:\\\\VSCODE\\\\SteveCopy\\\\projects\\\\solar-car-suspension.html\")",
+      "Bash(for f in index.html projects.html contact.html resume.html projects/*.html)",
+      "Bash(do sed -i 's|family=Inter:wght@400;500;600;700;800|family=Plus+Jakarta+Sans:wght@400;500;600;700;800|g' \"$f\")",
+      "Bash(done)",
+      "WebFetch(domain:github.com)",
+      "Bash(python:*)",
+      "Bash(del \"C:\\\\VSCODE\\\\SteveCopy\\\\temp_bundle.js\")",
+      "Bash(start \"\" \"C:\\\\VSCODE\\\\SteveCopy\\\\projects\\\\finite-element.html\")",
+      "Bash(gh auth status:*)",
+      "Bash(where:*)",
+      "Bash(git init:*)",
+      "Bash(git add:*)"
+    ]
+  }
+}
